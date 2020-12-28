@@ -1,0 +1,137 @@
+LET'S UPGRADE
+
+DAY 3
+
+1.Write a function “insert_any()” for inserting a node at any given position of the linked list. Assume
+position starts at 0.
+
+ANS
+void insert_any(int data,int position)
+{ 
+ struct node *ptr = (struct node*)malloc(sizeof(struct node)); 	
+ptr->data=data;
+int i; 	
+struct node *temp=head; 	
+if(position==1) 
+{ 	
+ptr->next=temp; 	
+head=ptr; 		
+return; 
+} 	
+for(i=1;i<position-1;i++)
+ //moving to the (n-1)th position node in the linked list 
+{ 
+    temp=temp->next; 	
+} 
+ptr->next=temp->next; 	
+temp->next=ptr; 
+}
+
+OUTPUT:
+
+->Enter the number of nodes: 5
+->Enter the data for the nodes: 44 5 22 6 95 
+->Enter the data you want to insert in between the nodes: 100 
+->Enter the position at which you want to insert the nodes: 4
+->List: 44 5 22 100 6 95
+
+2.Write a function “delete_beg()” for deleting a node from the beginning of the linked list.
+
+ANS
+void delete_beg()
+{ 
+struct node * toDelete; if(head == NULL) 
+{ 
+       printf("List is already empty."); 
+} 
+else 
+{ 
+toDelete = head; 
+head = head->next; 
+printf("\nData deleted = %d\n", toDelete->data);
+
+ /* Clears the memory occupied by first node*/ 
+
+free(toDelete); 
+printf("SUCCESSFULLY DELETED FIRST NODE FROM LIST\n"); 
+} 
+}
+
+
+OUTPUT:
+ ->Enter the total number of nodes: 5 
+ ->Enter the data of node 1: 10 
+ ->Enter the data of node 2: 20 
+ ->Enter the data of node 3: 30 
+ ->Enter the data of node 4: 40 
+ ->Enter the data of node 5: 50
+ ->SINGLY LINKED LIST CREATED  SUCCESSFULLY
+ ->Data in the list
+ ->Data = 10 
+ ->Data = 20
+ ->Data = 30 
+ ->Data = 40 
+ ->Data = 50 
+ ->Press 1 to delete first node: 1 
+ ->Data deleted = 10 
+ ->SUCCESSFULLY DELETED FIRST NODE FROM LIST 
+ ->Data in the list 
+ ->Data = 20 
+ ->Data = 30 
+ ->Data = 40 
+ ->Data = 50
+
+
+3.Write a function “delete_end()” for deleting a node from the end of the linked list.
+
+ANS
+void delete_end() 
+{ 
+struct node * toDelete, * secondLastNode;
+if(head == NULL)
+ {
+     printf("List is already empty."); 
+  } 
+else 
+{
+ toDelete = head; 
+ secondLastNode = head;
+ /* Traverse to the last node of the list * /
+ while(toDelete->next != NULL) 
+{ 
+secondLastNode = toDelete; 
+toDelete = toDelete->next;
+ } 
+if(toDelete == head)
+{ 
+	head = NULL; 
+} 
+else 
+{
+ /* Disconnect link of second last node with last node * /
+ secondLastNode->next = NULL; 
+} 
+/* Delete the last node */ 
+free(toDelete); 
+printf("SUCCESSFULLY DELETED LAST NODE OF LIST\n");
+ } 
+}
+
+OUTPUT:
+Output
+Enter the total number of nodes: 5 
+Enter the data of node 1: 10 Enter the data of node 2: 20 ->Enter the data of node 3: 30 Enter the data of node 4: 40 ->Enter the data of node 5: 50
+->SINGLY LINKED LIST CREATED SUCCESSFULLY 
+->Data in the list 
+->Data = 10 
+->Data = 20 
+->Data = 30 
+->Data = 40 
+->Data = 50 
+->Press 1 to delete last node: 1
+->SUCCESSFULLY DELETED LAST NODE OF LIST 
+->Data in the list 
+->Data = 10 
+->Data = 20 
+->Data = 30 
+->Data = 40
