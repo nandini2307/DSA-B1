@@ -1,0 +1,61 @@
+LET'S UPGRADE
+
+DAY 4
+
+1.In the Binary Search algorithm, it is suggested to calculate the mid as
+beg + (end - beg) / 2 instead of (beg + end) / 2. Why is it so?
+
+ANS)
+
+If we consider the two lines in a more generic setting, not related to binary search, the following observations can be made:
+-  the problem the second form tries to avoid is overflow, attempting to represent a number that is larger than the maximum representable number.
+
+-There is no restriction on how large the individual numbers beg and end are, so potentially they can both be larger than half of the maximum representable number. 
+
+Adding them means that the intermediate result (beg+end) can overflow.
+
+The second solution seems to eliminate the risk of overflowing, but introduces another one. If the values are signed values, their difference can again overflow (or underflow, depending on their signs). Unsigned values have no problem.
+
+There is another solution which you didn't post:
+
+		mid = beg/2 + end/2
+This solves every problem with overflow and underflow, but introduces a new problem, of precision loss. If working with integer values, division by 2 can give a result off by 0.5, adding these together, means that mid can be off by 1:
+
+		mid = 3/2 + 5/2; 
+	// mid is 3, instead of the 4 expected
+
+2.Write the algorithm/function for Ternary Search.
+
+Ans)
+
+int ternarySearch(int l, int r, int key, int ar[])
+{
+    if (r >= l) 
+    {
+        int mid1 = l + (r - l) / 3;
+        int mid2 = r - (r - l) / 3;
+        if (ar[mid1] == key) 
+       {
+            return mid1;
+        }
+        if (ar[mid2] == key) 
+       {
+            return mid2;
+        }
+        if (key < ar[mid1])
+       {
+            return ternarySearch(l, mid1 - 1, key, ar);
+       }
+        else if (key > ar[mid2]) 
+       {
+            return ternarySearch(mid2 + 1, r, key, ar);
+        }
+        else 
+       {
+            return ternarySearch(mid1 + 1, mid2 - 1, key, ar);
+        }
+    }
+         return -1;
+}
+
+ 
