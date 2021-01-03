@@ -1,0 +1,126 @@
+LET'S UPGRADE
+
+DAY 8
+
+1.A Barua number is a number which consists of only zeroes and ones and has only one 1.
+Barua number will start with 1. Given numbers, find out the multiplication of the numbers.
+Note: The input may contain one decimal number and all other Barua numbers.
+
+Input 1: 100 10 12 1000
+Output 1: 12000000
+Input 2: 100 121 1000000000000000
+Output 2: 12100000000000000000
+Input 3: 10 100 1000
+Output 3: 1000000
+
+ANS)
+
+=> IN C
+#include<stdio.h>
+int main()
+{
+    int prod,n,i,a[10];
+    prod = 1;
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    for(int i=0;i<n;i++)
+    {
+        prod = prod * a[i];
+    }
+    printf("%d",prod);
+    return 0;
+}
+
+=>IN PYTHON
+
+prod = 1
+li = list(map(int,input().split()))
+for x in li:
+    prod = prod * x
+print(prod)
+
+
+2.Implement push, pop and find the minimum element in a stack in O(1) time complexity.
+
+
+#include <bits/stdc++.h> 
+using namespace std; 
+struct MyStack 
+{ 
+	stack<int> s; 
+	int minEle; 
+	void getMin() 
+	{ 
+	if (s.empty()) 
+		cout << "Stack is empty\n"; 
+	else
+		cout <<"Min ele: "<< minEle << "\n"; 
+	} 
+	void peek() 
+	{ 
+		if (s.empty()) 
+		{ 
+			cout << "Stack is empty "; 
+			return; 
+		} 
+		int t = s.top();
+		cout << "Top Most Element is: "; 
+		(t < minEle)? cout << minEle: cout << t; 
+	} 
+	void pop() 
+	{ 
+		if (s.empty()) 
+		{ 
+			cout << "Stack is empty\n"; 
+			return; 
+		} 
+		cout << "Top Most Element Removed: "; 
+		int t = s.top(); 
+		s.pop(); 
+		if (t < minEle) 
+		{ 
+			cout << minEle << "\n"; 
+			minEle = 2*minEle - t; 
+		} 
+		else
+			cout << t << "\n"; 
+	}  
+	void push(int x) 
+	{ 
+		if (s.empty()) 
+		{ 
+			minEle = x; 
+			s.push(x); 
+			cout << "Number Inserted: " << x << "\n"; 
+			return; 
+		} 
+		if (x < minEle) 
+		{ 
+			s.push(2*x - minEle); 
+			minEle = x; 
+		} 
+		else
+		s.push(x); 
+		cout << "Number Inserted: " << x << "\n"; 
+	} 
+}; 
+int main() 
+{ 
+	MyStack s; 
+	s.push(3); 
+	s.push(5); 
+	s.getMin(); 
+	s.push(2); 
+	s.push(1); 
+	s.getMin(); 
+	s.pop(); 
+	s.getMin(); 
+	s.pop(); 
+	s.peek(); 
+	return 0; 
+} 
+
+      
